@@ -24,6 +24,9 @@ const TEXT_EXT = new Set(['.md', '.mdx', '.astro', '.html', '.js', '.mjs', '.ts'
 // Public, allowed contact points: info@ (on sousadev.com), S.E.B.A's own inbox (approved by
 // Henrique 2026-10-16) + commit-trailer noreply addresses.
 const ALLOWED_EMAILS = new Set(['info@sousadev.com', 'seba-sousadev@agentmail.to', 'noreply@anthropic.com']);
+// Private-record terms that are public anyway: Henrique's name, as on sousadev.com (approved by
+// Henrique 2026-10-16). His email/phone from the profile stay blocked.
+const ALLOWED_TERMS = new Set(['henrique sousa']);
 const isAllowedEmail = (e) => ALLOWED_EMAILS.has(e.toLowerCase()) || /@users\.noreply\.github\.com$/i.test(e);
 
 const GENERIC = [
@@ -53,7 +56,7 @@ function denylist() {
   const terms = new Set();
   const add = (t) => {
     t = (t || '').trim().replace(/^<.*>$/, '');
-    if (t && t !== '—' && t !== '-' && t.length >= 4) terms.add(t.toLowerCase());
+    if (t && t !== '—' && t !== '-' && t.length >= 4 && !ALLOWED_TERMS.has(t.toLowerCase())) terms.add(t.toLowerCase());
   };
   for (const kind of ['clients', 'employees']) {
     const base = join(WORKSPACE, kind);
