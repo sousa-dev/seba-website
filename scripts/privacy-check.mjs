@@ -21,8 +21,9 @@ const SCAN_DIRS = ['src', 'public'];
 const SCAN_FILES = ['astro.config.mjs', 'README.md'];
 const TEXT_EXT = new Set(['.md', '.mdx', '.astro', '.html', '.js', '.mjs', '.ts', '.css', '.json', '.txt', '.xml', '.svg', '.yml', '.yaml', '']);
 
-// Public, allowed contact points (already on sousadev.com) + commit-trailer noreply addresses.
-const ALLOWED_EMAILS = new Set(['info@sousadev.com', 'noreply@anthropic.com']);
+// Public, allowed contact points: info@ (on sousadev.com), S.E.B.A's own inbox (approved by
+// Henrique 2026-10-16) + commit-trailer noreply addresses.
+const ALLOWED_EMAILS = new Set(['info@sousadev.com', 'seba-sousadev@agentmail.to', 'noreply@anthropic.com']);
 const isAllowedEmail = (e) => ALLOWED_EMAILS.has(e.toLowerCase()) || /@users\.noreply\.github\.com$/i.test(e);
 
 const GENERIC = [
